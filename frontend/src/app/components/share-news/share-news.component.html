@@ -29,14 +29,13 @@
     <tr *ngFor="let tag of tags">
       <td></td>
       <td>{{ tag }} <button (click)="deleteTag(tag)">Delete tag</button></td>
-      <!-- implement click tag to delete -->
     </tr>
     <tr>
       <td></td>
       <td>
         <button (click)="(['/'])">Back</button>
         &nbsp;&nbsp;
-        <button (click)="processForm()">Post News</button>
+        <button (click)="processForm()" [disabled]="!formGroup.valid">Post News</button>
       </td>
     </tr>
   </table>
