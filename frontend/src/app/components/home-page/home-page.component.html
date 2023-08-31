@@ -1,0 +1,17 @@
+<h1>Home Page</h1>
+<table>
+  <tr>
+    <td>Time:</td>
+    <td>
+      <select (change)="changeMinutes()" #dropdown>
+        <option *ngFor="let mins of minuteOptions" [value]="mins">{{mins}} mins</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><button [routerLink]="['/share-news']">Post News</button></td>
+  </tr>
+</table>
+<br><br>
+<app-top-tags [selectedMin]="selectedMin"></app-top-tags>

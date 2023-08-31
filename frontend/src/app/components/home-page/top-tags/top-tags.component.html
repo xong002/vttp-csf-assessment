@@ -1,0 +1,7 @@
+<h3>Top Tags</h3>
+<table>
+    <tr *ngIf="!topTagsList[0]">No news hashtags found within the last {{selectedMin}} minutes.</tr>
+    <tr *ngFor="let tag of topTagsList" (click)="toNewsDetails(tag.tag)" style="cursor: pointer;">{{tag.tag}}
+     ({{tag.count}})    
+    </tr>
+</table>

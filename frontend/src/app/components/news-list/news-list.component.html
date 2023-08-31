@@ -1,0 +1,22 @@
+<h1>List of News with #</h1>
+<button>Back</button>
+<button [routerLink]="['/share-news']">Post News</button>
+
+<table>
+    <tr *ngFor="let n of newsList">
+        <td>
+            <hr>
+            News title: {{n.title}}
+            <br>
+            Publish date: {{n.postDate}}
+            <br>
+            <img [src]="n.image" >
+            <br>
+            {{n.description}}
+            <br>
+            Tags: <div *ngFor="let tag of n.tags">{{tag}}</div>
+            <hr>
+        </td>
+    </tr>
+</table>
+

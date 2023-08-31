@@ -1,6 +1,8 @@
 package vttp2023.batch3.csf.assessment.cnserver.services;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -72,16 +74,34 @@ public class NewsService {
 	// Do not change the method name and the return type
 	// You may add any number of parameters
 	// Returns a list of tags and their associated count
-	public List<TagCount> getTags(/* Any number of parameters */) {
-		return new LinkedList<>();
+	public List<TagCount> getTags(Integer minutes) {
+		List<Document> result = newsRepo.findTopTagsByMinutes(minutes);
+		List<TagCount> tagList = new LinkedList<>();
+		for (Document d : result) {
+			TagCount t = new TagCount(d.getString("tag"), d.getInteger("count"));
+			tagList.add(t);
+		}
+		return tagList;
 	}
 
 	// TODO: Task 3
 	// Do not change the method name and the return type
 	// You may add any number of parameters
 	// Returns a list of news
-	public List<News> getNewsByTag(/* Any number of parameters */) {
-		return new LinkedList<>();
+	public List<News> getNewsByTag(Integer minutes, String tag) {
+		List<Document> result = newsRepo.getNewsByTag(minutes, tag);
+		List<News> newsList = new LinkedList<>();
+		for (Document d : result) {
+			News n = new News();
+			n.setId(d.getObjectId("_id").toString());
+			n.setPostDate(d.getLong("postDate"));
+			n.setTitle(d.getString("title"));
+			n.setDescription(d.getString("description"));
+			n.setImage(d.getString("image"));
+			n.setTags(Arrays.asList(d.getString("tags").split(" ")));
+			newsList.add(n);
+		}
+		return newsList;
 	}
 
 }
