@@ -28,6 +28,7 @@ public class NewsRepository {
 	// }
 	// )
 	public Document insertNews(News news){
+		try{
 		Document doc = new Document();
 		doc.append("postDate", System.currentTimeMillis());
 		doc.append("title", news.getTitle());
@@ -35,8 +36,12 @@ public class NewsRepository {
 		doc.append("image", news.getImage());
 		doc.append("tags", news.getTags());
 		Document insertedDoc = template.insert(doc, "news");
-		// String insertedId = insertedDoc.get("insertedId").toString();
 		return insertedDoc;
+		} catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 	
 

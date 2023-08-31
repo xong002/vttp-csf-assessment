@@ -1,5 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { News } from 'src/app/models';
+import { NewsService } from 'src/app/news.service';
 
 @Component({
   selector: 'app-share-news',
@@ -10,6 +13,11 @@ export class ShareNewsComponent {
   formGroup!: FormGroup;
   fb = inject(FormBuilder);
   tags: string[] = [];
+  svc = inject(NewsService);
+  router = inject(Router);
+
+  @ViewChild('uploadFile')
+  private eRef!: ElementRef;
 
   ngOnInit() {
     this.formGroup = this.fb.group({
@@ -28,10 +36,13 @@ export class ShareNewsComponent {
 
   addTag() {
     let tagsInput: string = this.formGroup.value['tags'];
-    let tagsArray = tagsInput.split(/\s+/);
-    tagsArray.forEach((tag) => {
-      if (!this.tags.find((t) => t === tag)) this.tags.push(tag);
-    });
+    if (tagsInput != null) {
+      let tagsArray = tagsInput.split(/\s+/);
+      tagsArray.forEach((tag) => {
+        if (tag.trim() != '' && !this.tags.find((t) => t === tag))
+          this.tags.push(tag);
+      });
+    }
     this.formGroup.controls['tags'].reset();
   }
 
@@ -42,5 +53,16 @@ export class ShareNewsComponent {
     );
   }
 
-  processForm() {}
+  processForm() {
+    let n = new News();
+    n.title = this.formGroup.value['title'];
+    n.description = this.formGroup.value['description'];
+    n.tags = this.tags;
+    this.svc.saveNews(n, this.eRef).then(response => {
+      alert("News saved. News Id: " + (response as any).newsId);
+      // this.router.navigate(['/news-details']);
+    }).catch(error => {
+      alert("There is an error. Please try again");
+    });
+  }
 }

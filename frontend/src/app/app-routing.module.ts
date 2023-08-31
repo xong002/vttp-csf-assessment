@@ -4,7 +4,8 @@ import { ShareNewsComponent } from './components/share-news/share-news.component
 
 const routes: Routes = [
   { path: '', redirectTo: '/share-news', pathMatch: 'full'},
-  { path: 'share-news', component: ShareNewsComponent}
+  { path: 'share-news', component: ShareNewsComponent},
+  // { path: 'news-details'}
 ];
 
 @NgModule({
