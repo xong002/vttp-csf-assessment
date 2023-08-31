@@ -25,5 +25,6 @@ export class NewsListComponent {
         this.newsList.push(newsDetails);
       }
     })
+    localStorage.setItem("minutes", this.route.snapshot.queryParams['minutes']);
   }
 }

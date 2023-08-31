@@ -12,6 +12,13 @@ export class HomePageComponent {
   @ViewChild('dropdown')
   private eRef! : ElementRef;
 
+  ngOnInit(){
+    let m = localStorage.getItem("minutes");
+    if(m != null){
+      this.selectedMin = +m;
+    }
+  }
+
   changeMinutes(){
     this.selectedMin = this.eRef.nativeElement.value;
   }
