@@ -60,7 +60,7 @@ export class ShareNewsComponent {
     n.tags = this.tags;
     this.svc.saveNews(n, this.eRef).then(response => {
       alert("News saved. News Id: " + (response as any).newsId);
-      // this.router.navigate(['/news-details']);
+      this.router.navigate(['/']);
     }).catch(error => {
       alert("There is an error. Please try again");
     });

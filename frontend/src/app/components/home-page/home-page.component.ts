@@ -6,7 +6,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-  minuteOptions = [5, 15, 30, 450, 600];
+  minuteOptions = [5, 15, 30, 45, 60, 1000];
   selectedMin = 5;
 
   @ViewChild('dropdown')

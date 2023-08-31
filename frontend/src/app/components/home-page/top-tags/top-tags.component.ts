@@ -16,9 +16,9 @@ export class TopTagsComponent {
   router = inject(Router);
 
   ngOnInit(){
+    this.topTagsList = [];
     this.newsService.getTagsByTime(this.selectedMin).then( response => {
       for(let t of (response as any)){
-        console.log(t)
         let newTag = new Tag();
         newTag.tag = t.tag;
         newTag.count = t.count;
