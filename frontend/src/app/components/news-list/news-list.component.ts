@@ -12,6 +12,7 @@ export class NewsListComponent {
   svc = inject(NewsService);
   route = inject(ActivatedRoute);
   newsList : NewsDetails[] = [];
+  tag = this.route.snapshot.queryParams['tag'];
   
   ngOnInit(){
     this.svc.getNewsByTag(this.route.snapshot.queryParams['minutes'],this.route.snapshot.queryParams['tag']).then( response => {
