@@ -1,0 +1,43 @@
+<h1>Share a News</h1>
+<form [formGroup]="formGroup">
+  <table>
+    <tr>
+      <td>Title:</td>
+      <td>
+        <input type="text" formControlName="title" />
+      </td>
+    </tr>
+    <tr>
+      <td>Photo:</td>
+      <td>
+        <input type="file" formControlName="photo" />
+      </td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>
+        <textarea rows="4" formControlName="description"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>Tags:</td>
+      <td>
+        <input type="text" formControlName="tags" />
+        <button (click)="addTag()">+</button>
+      </td>
+    </tr>
+    <tr *ngFor="let tag of tags">
+      <td></td>
+      <td>{{ tag }} <button (click)="deleteTag(tag)">Delete tag</button></td>
+      <!-- implement click tag to delete -->
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <button (click)="(['/'])">Back</button>
+        &nbsp;&nbsp;
+        <button (click)="processForm()">Post News</button>
+      </td>
+    </tr>
+  </table>
+</form>
