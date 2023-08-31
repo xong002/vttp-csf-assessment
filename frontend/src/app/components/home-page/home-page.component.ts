@@ -17,6 +17,7 @@ export class HomePageComponent {
     if(m != null){
       this.selectedMin = +m;
     }
+    localStorage.clear();
   }
 
   changeMinutes(){
